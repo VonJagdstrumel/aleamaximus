@@ -9,11 +9,13 @@ TWITTER_ACCESS_SECRET=
 
 mkdir -p user
 
-if [ ! -d venv ]; then
-    python3 -mvenv venv
+if [ -d venv ]; then
+    . venv/bin/activate
+else
+    python3 -mvenv --system-site-packages venv
+    . venv/bin/activate
+    pip install -r requirements.txt
 fi
-
-. venv/bin/activate
 
 if [ ! -f user/whitelist.txt ]; then
     touch user/whitelist.txt
