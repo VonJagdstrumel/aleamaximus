@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 DISCORD_SESSION_ID=
 DISCORD_CHANNEL_ID=
 TWITTER_CONSUMER_TOKEN=
@@ -12,7 +14,8 @@ mkdir -p user
 if [ -d venv ]; then
     . venv/bin/activate
 else
-    python3 -mvenv --system-site-packages venv
+    python_exe=$(which python3.7 python3.6 2> /dev/null | head -n1)
+    $python_exe -mvenv --system-site-packages venv
     . venv/bin/activate
     pip install -r requirements.txt
 fi
