@@ -17,7 +17,7 @@ rSpace = re.compile(r'[ \t]+')
 db_path = sys.argv[1]
 conn = sqlite3.connect(db_path)
 conn.row_factory = sqlite3.Row
-c = conn.execute('SELECT * FROM raw_message')
+c = conn.execute('SELECT * FROM raw_message t1 WHERE t1.id NOT IN (SELECT t2.id FROM clean_message t2)')
 
 while True:
     row_list = c.fetchmany(100)
